@@ -1,116 +1,739 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kyoto Relaxation Salon</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雅 MIYABI - 京都メンズエステティック</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Serif+JP:wght@300;400;600;900&family=Italiana&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --crimson: #8B1538;
+            --deep-plum: #2D1B2E;
+            --gold: #D4AF37;
+            --cream: #F5F1E8;
+            --soft-pink: #F4E4E0;
+            --charcoal: #1A1A1A;
+            --shadow: rgba(139, 21, 56, 0.15);
+        }
 
-  <style>
+```
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-      background: #000;
-      color: #fff;
-      text-align: center;
-      line-height: 1.6;
+        font-family: 'Noto Serif JP', serif;
+        background: var(--cream);
+        color: var(--deep-plum);
+        overflow-x: hidden;
+        line-height: 1.8;
     }
 
+    /* Background Ornament */
+    body::before {
+        content: '';
+        position: fixed;
+        top: -50%;
+        right: -20%;
+        width: 100%;
+        height: 200%;
+        background: radial-gradient(circle at center, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    /* Header */
     header {
-      background-image: url("https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=1600");
-      background-size: cover;
-      background-position: center;
-      padding: 120px 20px;
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--deep-plum) 0%, #1A1A1A 100%);
+        overflow: hidden;
     }
 
-    header h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
+    header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(212, 175, 55, 0.03) 2px, rgba(212, 175, 55, 0.03) 4px),
+            repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(212, 175, 55, 0.03) 2px, rgba(212, 175, 55, 0.03) 4px);
+        opacity: 0;
+        animation: patternFade 2s ease-in-out 0.5s forwards;
     }
 
-    header p {
-      opacity: 0.9;
-      margin-bottom: 30px;
+    @keyframes patternFade {
+        to { opacity: 1; }
     }
 
-    .btn {
-      display: inline-block;
-      padding: 14px 32px;
-      background: #e91e63;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 999px;
-      font-weight: bold;
+    .hero-content {
+        text-align: center;
+        position: relative;
+        z-index: 2;
     }
 
+    .logo {
+        font-family: 'Noto Serif JP', serif;
+        font-size: clamp(3rem, 8vw, 7rem);
+        font-weight: 900;
+        color: var(--gold);
+        letter-spacing: 0.3em;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 1.2s ease-out 0.3s forwards;
+        text-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .tagline {
+        font-family: 'Italiana', serif;
+        font-size: clamp(1rem, 2.5vw, 1.8rem);
+        color: var(--soft-pink);
+        letter-spacing: 0.4em;
+        margin-bottom: 3rem;
+        opacity: 0;
+        animation: fadeUp 1.2s ease-out 0.6s forwards;
+    }
+
+    .subtitle {
+        font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+        color: var(--cream);
+        font-weight: 300;
+        opacity: 0;
+        animation: fadeUp 1.2s ease-out 0.9s forwards;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 2;
+    }
+
+    /* Navigation */
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 2rem 4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        background: transparent;
+        transition: background 0.4s ease;
+    }
+
+    nav.scrolled {
+        background: rgba(45, 27, 46, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1.5rem 4rem;
+    }
+
+    .nav-logo {
+        font-family: 'Noto Serif JP', serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--gold);
+        letter-spacing: 0.2em;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 3rem;
+        list-style: none;
+    }
+
+    .nav-links a {
+        font-family: 'Noto Serif JP', serif;
+        color: var(--cream);
+        text-decoration: none;
+        font-size: 0.95rem;
+        letter-spacing: 0.1em;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        color: var(--gold);
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+
+    /* Section Styling */
     section {
-      padding: 60px 20px;
-      max-width: 800px;
-      margin: auto;
+        position: relative;
+        padding: 8rem 4rem;
+        max-width: 1400px;
+        margin: 0 auto;
     }
 
-    .menu-box {
-      background: #111;
-      padding: 30px;
-      border-radius: 12px;
-      margin-top: 20px;
+    .section-title {
+        font-family: 'Noto Serif JP', serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 600;
+        color: var(--crimson);
+        margin-bottom: 1rem;
+        letter-spacing: 0.15em;
+        position: relative;
+        display: inline-block;
     }
 
-    .access-img {
-      width: 100%;
-      border-radius: 12px;
-      margin-top: 20px;
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
     }
 
+    .section-subtitle {
+        font-family: 'Italiana', serif;
+        font-size: 1.2rem;
+        color: var(--deep-plum);
+        opacity: 0.7;
+        letter-spacing: 0.3em;
+        margin-bottom: 4rem;
+    }
+
+    /* Services Grid */
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 3rem;
+        margin-top: 4rem;
+    }
+
+    .service-card {
+        background: white;
+        padding: 3rem;
+        border-radius: 0;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 40px var(--shadow);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 0;
+        background: linear-gradient(180deg, var(--crimson), var(--gold));
+        transition: height 0.4s ease;
+    }
+
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px var(--shadow);
+    }
+
+    .service-card:hover::before {
+        height: 100%;
+    }
+
+    .service-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        display: block;
+    }
+
+    .service-name {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--crimson);
+        margin-bottom: 1rem;
+        letter-spacing: 0.1em;
+    }
+
+    .service-description {
+        color: var(--deep-plum);
+        opacity: 0.8;
+        margin-bottom: 1.5rem;
+        line-height: 2;
+    }
+
+    .service-price {
+        font-family: 'Italiana', serif;
+        font-size: 1.3rem;
+        color: var(--gold);
+        letter-spacing: 0.2em;
+    }
+
+    /* About Section */
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: center;
+        margin-top: 4rem;
+    }
+
+    .about-text {
+        font-size: 1.1rem;
+        line-height: 2.2;
+        color: var(--deep-plum);
+    }
+
+    .about-text p {
+        margin-bottom: 2rem;
+    }
+
+    .about-image {
+        width: 100%;
+        height: 500px;
+        background: linear-gradient(135deg, var(--crimson) 0%, var(--deep-plum) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-image::before {
+        content: '京都の伝統と現代の融合';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--gold);
+        font-size: 1.5rem;
+        font-weight: 300;
+        letter-spacing: 0.3em;
+        text-align: center;
+        opacity: 0.5;
+    }
+
+    /* Therapist Section */
+    .therapist-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 3rem;
+        margin-top: 4rem;
+    }
+
+    .therapist-card {
+        text-align: center;
+        padding: 2rem;
+        background: white;
+        box-shadow: 0 8px 30px var(--shadow);
+        transition: transform 0.4s ease;
+    }
+
+    .therapist-card:hover {
+        transform: scale(1.05);
+    }
+
+    .therapist-photo {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--soft-pink), var(--gold));
+        margin: 0 auto 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+    }
+
+    .therapist-name {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--crimson);
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.15em;
+    }
+
+    .therapist-title {
+        font-family: 'Italiana', serif;
+        color: var(--gold);
+        font-size: 1.1rem;
+        letter-spacing: 0.2em;
+        margin-bottom: 1rem;
+    }
+
+    .therapist-description {
+        color: var(--deep-plum);
+        opacity: 0.8;
+        line-height: 1.9;
+    }
+
+    /* Contact Section */
+    #contact {
+        background: var(--deep-plum);
+        color: var(--cream);
+        margin: 0;
+        max-width: 100%;
+        padding: 8rem 4rem;
+    }
+
+    #contact .section-title {
+        color: var(--gold);
+    }
+
+    #contact .section-subtitle {
+        color: var(--cream);
+        opacity: 0.7;
+    }
+
+    .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        margin-top: 4rem;
+    }
+
+    .contact-info {
+        font-size: 1.1rem;
+        line-height: 2.5;
+    }
+
+    .contact-info p {
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .contact-info strong {
+        color: var(--gold);
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        min-width: 100px;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        padding: 1rem 1.5rem;
+        color: var(--cream);
+        font-family: 'Noto Serif JP', serif;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        outline: none;
+        border-color: var(--gold);
+    }
+
+    .contact-form textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .submit-btn {
+        background: var(--crimson);
+        color: white;
+        border: none;
+        padding: 1.2rem 3rem;
+        font-family: 'Noto Serif JP', serif;
+        font-size: 1.1rem;
+        letter-spacing: 0.2em;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.3s ease;
+        align-self: flex-start;
+    }
+
+    .submit-btn:hover {
+        background: var(--gold);
+        transform: translateX(10px);
+    }
+
+    /* Footer */
     footer {
-      padding: 40px 20px;
-      background: #111;
-      font-size: 14px;
-      opacity: 0.7;
+        background: var(--charcoal);
+        color: var(--cream);
+        text-align: center;
+        padding: 3rem;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
     }
-  </style>
+
+    /* Scroll Animation */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        nav {
+            padding: 1.5rem 2rem;
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        section {
+            padding: 4rem 2rem;
+        }
+
+        .services-grid,
+        .therapist-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .about-content,
+        .contact-content {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+        }
+    }
+
+    /* Decorative Element */
+    .decorative-line {
+        width: 100px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        margin: 3rem auto;
+    }
+</style>
+```
+
 </head>
-
 <body>
+    <nav id="nav">
+        <div class="nav-logo">雅</div>
+        <ul class="nav-links">
+            <li><a href="#services">サービス</a></li>
+            <li><a href="#about">当店について</a></li>
+            <li><a href="#therapists">セラピスト</a></li>
+            <li><a href="#contact">ご予約</a></li>
+        </ul>
+    </nav>
 
+```
 <header>
-  <h1>Kyoto Relaxation Salon</h1>
-  <p>Private Healing Space near Kyoto Station</p>
-  <a class="btn" href="#">WEB予約はこちら</a>
+    <div class="hero-content">
+        <h1 class="logo">雅</h1>
+        <p class="tagline">MIYABI KYOTO</p>
+        <p class="subtitle">京都が誇る最上級のメンズエステティック<br>心と身体を解き放つ至福の時間</p>
+    </div>
 </header>
 
-<section>
-  <h2>About</h2>
-  <p>
-    完全予約制のプライベートサロン。<br>
-    日常を忘れ、深いリラクゼーションへ。
-  </p>
+<section id="services">
+    <div class="fade-in">
+        <h2 class="section-title">サービス</h2>
+        <p class="section-subtitle">SERVICES</p>
+    </div>
+
+    <div class="services-grid">
+        <div class="service-card fade-in">
+            <span class="service-icon">🌸</span>
+            <h3 class="service-name">雅コース</h3>
+            <p class="service-description">当店人気No.1の贅沢な全身トリートメント。アロマオイルを使用した丁寧な施術で、日々の疲れを癒します。</p>
+            <p class="service-price">90分 ¥18,000</p>
+        </div>
+
+        <div class="service-card fade-in">
+            <span class="service-icon">✨</span>
+            <h3 class="service-name">プレミアムコース</h3>
+            <p class="service-description">最上級のおもてなしと技術。深いリラクゼーションと美容効果を兼ね備えた特別なコースです。</p>
+            <p class="service-price">120分 ¥25,000</p>
+        </div>
+
+        <div class="service-card fade-in">
+            <span class="service-icon">🎋</span>
+            <h3 class="service-name">リフレッシュコース</h3>
+            <p class="service-description">短時間でリフレッシュしたい方に。仕事帰りやお昼休みにもおすすめの気軽なコースです。</p>
+            <p class="service-price">60分 ¥12,000</p>
+        </div>
+
+        <div class="service-card fade-in">
+            <span class="service-icon">🌙</span>
+            <h3 class="service-name">深夜コース</h3>
+            <p class="service-description">夜遅くまでお仕事の方のための特別コース。深夜でもゆったりと癒しの時間をお過ごしいただけます。</p>
+            <p class="service-price">90分 ¥20,000</p>
+        </div>
+    </div>
 </section>
 
-<section>
-  <h2>Menu</h2>
+<div class="decorative-line"></div>
 
-  <div class="menu-box">
-    <p>60min　¥14,000</p>
-    <p>90min　¥20,000</p>
-    <p>120min ¥26,000</p>
-  </div>
+<section id="about">
+    <div class="fade-in">
+        <h2 class="section-title">当店について</h2>
+        <p class="section-subtitle">ABOUT US</p>
+    </div>
+
+    <div class="about-content">
+        <div class="about-text fade-in">
+            <p>京都の風情ある街並みに佇む「雅」は、伝統と革新が融合した特別なメンズエステサロンです。</p>
+            <p>経験豊富なニューハーフセラピストたちが、繊細な感性と確かな技術で、お客様一人ひとりに寄り添った極上の癒しをご提供いたします。</p>
+            <p>プライバシーを重視した完全個室で、日常から解放される至福のひとときをお過ごしください。心身ともにリフレッシュし、明日への活力を取り戻していただけることをお約束いたします。</p>
+        </div>
+        <div class="about-image fade-in"></div>
+    </div>
 </section>
 
-<section>
-  <h2>Access</h2>
+<div class="decorative-line"></div>
 
-  <p>京都駅から徒歩5分のプライベート空間</p>
+<section id="therapists">
+    <div class="fade-in">
+        <h2 class="section-title">セラピスト</h2>
+        <p class="section-subtitle">THERAPISTS</p>
+    </div>
 
-  <img
-    class="access-img"
-    src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?q=80&w=1200"
-    alt="salon room"
-  >
+    <div class="therapist-grid">
+        <div class="therapist-card fade-in">
+            <div class="therapist-photo">💫</div>
+            <h3 class="therapist-name">美月</h3>
+            <p class="therapist-title">MITSUKI</p>
+            <p class="therapist-description">癒しのスペシャリスト。柔らかな雰囲気と丁寧な施術で、多くのお客様からご支持をいただいております。</p>
+        </div>
+
+        <div class="therapist-card fade-in">
+            <div class="therapist-photo">🌺</div>
+            <h3 class="therapist-name">麗華</h3>
+            <p class="therapist-title">REIKA</p>
+            <p class="therapist-description">確かな技術と豊富な経験を持つベテランセラピスト。お客様のお悩みに寄り添った施術が得意です。</p>
+        </div>
+
+        <div class="therapist-card fade-in">
+            <div class="therapist-photo">🎀</div>
+            <h3 class="therapist-name">あやめ</h3>
+            <p class="therapist-title">AYAME</p>
+            <p class="therapist-description">明るい笑顔と心地よいトークで人気のセラピスト。リラックスした雰囲気の中で極上の時間をお届けします。</p>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="fade-in">
+        <h2 class="section-title">ご予約・お問い合わせ</h2>
+        <p class="section-subtitle">CONTACT</p>
+    </div>
+
+    <div class="contact-content">
+        <div class="contact-info fade-in">
+            <p><strong>営業時間:</strong> 12:00 - 翌5:00（年中無休）</p>
+            <p><strong>電話:</strong> 075-XXX-XXXX</p>
+            <p><strong>LINE:</strong> @miyabi-kyoto</p>
+            <p><strong>住所:</strong> 京都府京都市中京区XX町XXX</p>
+            <p><strong>アクセス:</strong> 地下鉄烏丸線「烏丸御池駅」徒歩5分</p>
+            <p style="margin-top: 2rem; font-size: 0.95rem; opacity: 0.8;">完全予約制となっております。事前にお電話またはLINEにてご予約ください。</p>
+        </div>
+
+        <form class="contact-form fade-in">
+            <input type="text" placeholder="お名前" required>
+            <input type="tel" placeholder="お電話番号" required>
+            <input type="email" placeholder="メールアドレス">
+            <textarea placeholder="ご希望のコース・日時などをご記入ください"></textarea>
+            <button type="submit" class="submit-btn">送信する</button>
+        </form>
+    </div>
 </section>
 
 <footer>
-  © Kyoto Relaxation Salon
+    <p>&copy; 2026 雅 MIYABI KYOTO. All Rights Reserved.</p>
+    <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.6;">当店は18歳未満の方のご利用はお断りしております</p>
 </footer>
+
+<script>
+    // Navigation scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Scroll animation
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 100);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach((el) => {
+        observer.observe(el);
+    });
+
+    // Form submission
+    document.querySelector('.contact-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('お問い合わせありがとうございます。\n後ほど担当者よりご連絡させていただきます。');
+        e.target.reset();
+    });
+</script>
+```
 
 </body>
 </html>
