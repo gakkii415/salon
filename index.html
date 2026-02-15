@@ -563,175 +563,7 @@
     }
   </style>
 </head>
-<!-- ここから：初回表示の重要告知モーダル（閉じるまで操作不可） -->
-<div id="legal-modal" class="legal-modal" aria-hidden="true" role="dialog" aria-modal="true">
-  <div class="legal-backdrop"></div>
-  <div class="legal-box" role="document" aria-label="重要なお知らせ">
-    <h2 class="legal-title">重要なお知らせ（必ずお読みください）</h2>
 
-    <div class="legal-body">
-      <p>
-        本ウェブサイトは、ウェブ表示、画面構成およびシステム挙動の確認を目的として試験的に公開しているページです。
-      </p>
-      <p>
-        サイト上には、画面設計上の検証を目的として「予約」等の表示または入力導線が含まれておりますが、これらはすべて動作確認用のダミー表示であり、現時点において実際の予約受付、商品・サービスの提供、顧客の勧誘・募集、契約の申込みまたは締結の誘引、対価の受領その他一切の営業行為を行うものではありません。
-      </p>
-      <p>
-        また、本サイトを通じて送信された情報等に基づき、取引関係が成立することはなく、事業としての運営も開始しておりません。
-      </p>
-      <p>
-        本サイトの公開は、既存の契約上の義務および関係法令を遵守する範囲内で行うものであり、これらに抵触する目的または意図を有するものではありません。
-      </p>
-    </div>
-
-    <div class="legal-actions">
-      <label class="legal-check">
-        <input id="legal-check" type="checkbox">
-        上記内容を確認しました
-      </label>
-      <button id="legal-accept" class="legal-btn" disabled>同意してサイトを見る</button>
-    </div>
-
-    <p class="legal-note">※同意しない場合は、このページを閉じてください。</p>
-  </div>
-</div>
-
-<style>
-  .legal-modal { position: fixed; inset: 0; z-index: 99999; display: none; }
-  .legal-modal.show { display: block; }
-
-  .legal-backdrop {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,0.78);
-    backdrop-filter: blur(6px);
-  }
-
-  .legal-box{
-    position: relative;
-    width: min(920px, calc(100% - 32px));
-    max-height: calc(100% - 48px);
-    margin: 24px auto;
-    background: rgba(10, 0, 20, 0.98);
-    border: 1px solid rgba(255, 27, 141, 0.35);
-    border-radius: 18px;
-    box-shadow: 0 20px 80px rgba(0,0,0,0.6);
-    color: #E8E8E8;
-    overflow: hidden;
-  }
-
-  .legal-title{
-    font-family: 'Cinzel', serif;
-    letter-spacing: 0.08em;
-    padding: 18px 20px;
-    background: linear-gradient(135deg, rgba(255,27,141,0.18), rgba(255,215,0,0.10));
-    border-bottom: 1px solid rgba(255, 27, 141, 0.25);
-    font-size: 1.15rem;
-  }
-
-  .legal-body{
-    padding: 18px 20px;
-    overflow: auto;
-    max-height: calc(100vh - 240px);
-    line-height: 1.9;
-    font-size: 0.98rem;
-  }
-  .legal-body p{ margin-bottom: 14px; opacity: 0.95; }
-
-  .legal-actions{
-    padding: 14px 20px 18px;
-    border-top: 1px solid rgba(255, 27, 141, 0.18);
-    display: flex;
-    gap: 14px;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-
-  .legal-check{
-    display: inline-flex;
-    gap: 10px;
-    align-items: center;
-    font-size: 0.95rem;
-    opacity: 0.95;
-  }
-  .legal-check input{ transform: scale(1.15); }
-
-  .legal-btn{
-    padding: 12px 18px;
-    border-radius: 999px;
-    border: none;
-    cursor: pointer;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    background: linear-gradient(135deg, #FF1B8D, #E91E63);
-    color: #fff;
-    box-shadow: 0 10px 30px rgba(255, 27, 141, 0.25);
-    transition: transform .2s ease, filter .2s ease, opacity .2s ease;
-  }
-  .legal-btn:disabled{
-    opacity: 0.45;
-    cursor: not-allowed;
-    filter: grayscale(0.2);
-    box-shadow: none;
-  }
-  .legal-btn:not(:disabled):hover{
-    transform: translateY(-2px);
-    filter: brightness(1.05);
-  }
-
-  .legal-note{
-    padding: 0 20px 18px;
-    font-size: 0.85rem;
-    opacity: 0.75;
-  }
-</style>
-
-<script>
-  (function () {
-    const modal = document.getElementById('legal-modal');
-    const check = document.getElementById('legal-check');
-    const btn = document.getElementById('legal-accept');
-
-    // モーダル表示（最初に必ず）
-    function openModal() {
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden', 'false');
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-    }
-
-    // 同意で閉じる
-    function closeModal() {
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden', 'true');
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-      // 次回以降出したくないなら、下の1行を有効化
-      // localStorage.setItem('legalAccepted', '1');
-    }
-
-    // ページの操作をブロック（Escや背景クリックで閉じさせない）
-    modal.addEventListener('click', (e) => {
-      // 背景クリックは無効
-      if (e.target.classList.contains('legal-backdrop')) e.preventDefault();
-    });
-
-    // チェックボックスでボタン有効化
-    check.addEventListener('change', () => {
-      btn.disabled = !check.checked;
-    });
-
-    btn.addEventListener('click', () => {
-      closeModal();
-    });
-
-    // 「毎回必ず出す」設定（現状）
-    // 「一度同意したら次回から出さない」場合は、下のifに差し替え
-    // if (!localStorage.getItem('legalAccepted')) openModal();
-    openModal();
-  })();
-</script>
-<!-- ここまで：初回表示の重要告知モーダル -->
 <body>
   <div class="top-bar">
     ★ 完全予約制 ★ 24時間受付中 ★ 18歳未満入店不可 ★
@@ -1017,6 +849,14 @@
   </footer>
 
   <script>
+    alert(`本ウェブサイトは、ウェブ表示、画面構成およびシステム挙動の確認を目的として試験的に公開しているページです。
+
+サイト上には、画面設計上の検証を目的として「予約」等の表示または入力導線が含まれておりますが、これらはすべて動作確認用のダミー表示であり、現時点において実際の予約受付、商品・サービスの提供、顧客の勧誘・募集、契約の申込みまたは締結の誘引、対価の受領その他一切の営業行為を行うものではありません。
+
+また、本サイトを通じて送信された情報等に基づき、取引関係が成立することはなく、事業としての運営も開始しておりません。
+
+本サイトの公開は、既存の契約上の義務および関係法令を遵守する範囲内で行うものであり、これらに抵触する目的または意図を有するものではありません。`);
+    
     // Scroll reveal animation
     const reveals = document.querySelectorAll('.reveal');
     const revealOnScroll = () => {
