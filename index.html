@@ -1,901 +1,385 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VELVET ROSE - 京都プレミアムメンズエステ</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Montserrat:wght@300;400;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>艶 -EN- | 京都メンズエステ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --neon-pink: #FF1B8D;
-      --hot-magenta: #E91E63;
-      --deep-purple: #1a0033;
-      --dark-bg: #0A0014;
-      --gold-accent: #FFD700;
-      --silver: #E8E8E8;
-      --rose-gold: #B76E79;
-      --glow-pink: rgba(255, 27, 141, 0.6);
-      --glow-purple: rgba(138, 43, 226, 0.4);
+      --bg: #0f0a16;
+      --bg-soft: #1d1328;
+      --text: #f8f4ff;
+      --sub: #cbb9de;
+      --accent: #ff4ca0;
+      --accent-2: #8d65ff;
+      --gold: #ffce73;
+      --card: rgba(255, 255, 255, 0.05);
+      --line: rgba(255, 255, 255, 0.16);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: var(--dark-bg);
-      color: var(--silver);
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    /* Animated Background */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
       background:
-        radial-gradient(circle at 20% 50%, rgba(255, 27, 141, 0.14) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.14) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(255, 215, 0, 0.07) 0%, transparent 40%);
-      pointer-events: none;
-      z-index: 0;
-      animation: bgPulse 15s ease-in-out infinite;
-    }
-    @keyframes bgPulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-
-    /* Scanlines Effect */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255, 27, 141, 0.03) 2px,
-        rgba(255, 27, 141, 0.03) 4px
-      );
-      pointer-events: none;
-      z-index: 1;
+        radial-gradient(70% 40% at 80% -10%, rgba(255, 76, 160, 0.3), transparent 60%),
+        radial-gradient(50% 30% at 10% 0%, rgba(141, 101, 255, 0.35), transparent 60%),
+        var(--bg);
+      line-height: 1.7;
     }
 
-    /* Top Bar */
-    .top-bar {
-      background: linear-gradient(90deg, var(--neon-pink), var(--hot-magenta));
-      padding: 0.8rem 2rem;
+    .container { width: min(1120px, 92%); margin-inline: auto; }
+
+    .notice {
+      background: linear-gradient(90deg, var(--accent), #ff7fbf);
+      color: #fff;
       text-align: center;
+      padding: 0.6rem 1rem;
       font-size: 0.9rem;
-      letter-spacing: 0.1em;
-      position: relative;
-      z-index: 100;
-      animation: slideDown 0.6s ease-out;
+      letter-spacing: 0.08em;
+      font-weight: 700;
     }
-    @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
 
-    /* Navigation */
-    nav {
+    header {
       position: sticky;
       top: 0;
-      padding: 1.5rem 3rem;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      background: rgba(15, 10, 22, 0.76);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 1000;
-      background: rgba(10, 0, 20, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 27, 141, 0.3);
+      min-height: 74px;
     }
 
-    .logo {
-      font-family: 'Cinzel', serif;
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
       font-size: 2rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--neon-pink), var(--gold-accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: 0.15em;
-      text-shadow: 0 0 30px var(--glow-pink);
-      animation: glow 3s ease-in-out infinite;
-    }
-    @keyframes glow { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.25); } }
-
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      color: var(--silver);
+      letter-spacing: 0.16em;
+      color: var(--gold);
       text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      position: relative;
-      transition: color 0.3s ease;
+      font-weight: 700;
     }
-    .nav-links a::before {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--neon-pink), var(--gold-accent));
-      transition: width 0.3s ease;
-    }
-    .nav-links a:hover { color: var(--neon-pink); }
-    .nav-links a:hover::before { width: 100%; }
 
-    /* Hero Section */
+    .nav ul { display: flex; gap: 1.25rem; list-style: none; }
+    .nav a { color: var(--text); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+    .nav a:hover { color: var(--accent); }
+
     .hero {
+      min-height: 86vh;
+      display: grid;
+      place-items: center;
       position: relative;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
-      z-index: 2;
     }
 
-    /* 画像URLで自然なヒーロー背景（Unsplash） */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(135deg, rgba(26, 0, 51, 0.78) 0%, rgba(10, 0, 20, 0.9) 100%),
-        url("https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=2400&q=80");
-      background-size: cover;
-      background-position: center;
-      animation: heroShift 22s ease-in-out infinite;
-      filter: saturate(1.05) contrast(1.05);
-    }
-    @keyframes heroShift { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
-
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      max-width: 900px;
-      padding: 2rem;
+        linear-gradient(120deg, rgba(8, 6, 12, 0.85), rgba(8, 6, 12, 0.2)),
+        url('https://images.unsplash.com/photo-1522336284037-91f7da073525?auto=format&fit=crop&w=1920&q=80') center/cover;
+      filter: saturate(1.1);
+      z-index: -1;
     }
 
-    .hero-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(3.5rem, 10vw, 8rem);
+    .hero-inner { text-align: center; padding: 5rem 0 4rem; }
+
+    .kicker {
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
       font-weight: 900;
-      background: linear-gradient(135deg, #FFD700, #FF1B8D, #8A2BE2);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1.2rem;
-      letter-spacing: 0.05em;
-      animation: gradientFlow 5s ease infinite, titleAppear 1s ease-out;
-      text-shadow: 0 0 40px rgba(255,27,141,0.35);
-    }
-    @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-    @keyframes titleAppear { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-
-    .hero-subtitle {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.2rem, 3vw, 2rem);
-      color: var(--neon-pink);
-      margin-bottom: 1rem;
-      letter-spacing: 0.3em;
-      animation: titleAppear 1s ease-out 0.3s backwards;
+      text-shadow: 0 10px 30px rgba(0,0,0,.4);
     }
 
-    .hero-description {
+    .lead {
+      width: min(760px, 94%);
+      margin-inline: auto;
+      color: #efe8f7;
       font-size: clamp(1rem, 2vw, 1.2rem);
-      color: var(--silver);
-      margin-bottom: 2.5rem;
-      line-height: 1.9;
-      animation: titleAppear 1s ease-out 0.6s backwards;
-      opacity: 0.92;
+      margin-bottom: 2rem;
     }
 
-    .cta-button {
+    .btn-group { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
       display: inline-block;
-      padding: 1.25rem 3.2rem;
-      background: linear-gradient(135deg, var(--neon-pink), var(--hot-magenta));
-      color: white;
-      font-size: 1.05rem;
+      border-radius: 999px;
+      padding: 0.9rem 1.8rem;
       font-weight: 700;
-      letter-spacing: 0.15em;
       text-decoration: none;
-      border-radius: 50px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      animation: titleAppear 1s ease-out 0.9s backwards;
-      box-shadow: 0 10px 40px rgba(255, 27, 141, 0.35);
-    }
-    .cta-button::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-      transform: rotate(45deg);
-      animation: shine 3s infinite;
-    }
-    @keyframes shine {
-      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-    }
-    .cta-button:hover { transform: scale(1.05); box-shadow: 0 15px 60px rgba(255, 27, 141, 0.55); }
-
-    /* Section Container */
-    section {
-      position: relative;
-      padding: 6rem 3rem;
-      max-width: 1400px;
-      margin: 0 auto;
-      z-index: 2;
+      transition: 0.2s ease;
     }
 
-    .section-header { text-align: center; margin-bottom: 4rem; }
-    .section-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #ff84be);
+      color: #fff;
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,.5);
+      color: #fff;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    section { padding: 5.5rem 0; }
+
+    .section-head { margin-bottom: 2rem; }
+    .section-head .en {
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
       font-weight: 700;
-      background: linear-gradient(135deg, var(--neon-pink), var(--gold-accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1rem;
-      letter-spacing: 0.1em;
-    }
-    .section-subtitle {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: var(--rose-gold);
-      letter-spacing: 0.3em;
       text-transform: uppercase;
+      margin-bottom: 0.5rem;
     }
 
-    /* Cast Section */
-    .cast-grid {
+    .section-head h2 { font-size: clamp(1.7rem, 4vw, 2.7rem); margin-bottom: 0.6rem; }
+    .section-head p { color: var(--sub); }
+
+    .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2.5rem;
-      margin-top: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
     }
 
-    .cast-card {
-      background: linear-gradient(135deg, rgba(255, 27, 141, 0.08), rgba(138, 43, 226, 0.05));
-      border: 1px solid rgba(255, 27, 141, 0.28);
-      position: relative;
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.3rem;
+    }
+
+    .card h3 { margin-bottom: 0.5rem; color: #ffd8ed; }
+    .card p { color: var(--sub); font-size: 0.95rem; }
+
+    .therapist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .therapist {
+      border: 1px solid var(--line);
+      border-radius: 16px;
       overflow: hidden;
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-      cursor: pointer;
-      border-radius: 18px;
+      background: #130d1f;
     }
 
-    .cast-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255, 27, 141, 0.09), transparent);
-      transform: rotate(45deg);
-      transition: transform 0.6s ease;
-      pointer-events: none;
+    .therapist img { width: 100%; height: 280px; object-fit: cover; }
+    .therapist-body { padding: 1rem; }
+    .therapist h3 { font-size: 1.2rem; margin-bottom: .3rem; }
+    .therapist small { color: var(--gold); }
+    .therapist p { color: var(--sub); margin-top: .5rem; font-size: 0.92rem; }
+
+    .price-table {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--card);
     }
 
-    .cast-card:hover::before { transform: translateX(100%) translateY(100%) rotate(45deg); }
-    .cast-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 60px rgba(255, 27, 141, 0.35);
-      border-color: var(--neon-pink);
-    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 1rem; border-bottom: 1px solid var(--line); text-align: left; }
+    th { background: rgba(255, 255, 255, 0.04); color: #ffdff0; }
+    tr:last-child td { border-bottom: none; }
 
-    /* ✅ 絵文字→画像URLに置換 */
-    .cast-photo {
-      width: 100%;
-      height: 360px;
-      object-fit: cover;
-      display: block;
-      filter: saturate(1.05) contrast(1.05);
-    }
-
-    .cast-body { padding: 1.8rem 2rem 2rem; }
-
-    .cast-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--neon-pink);
-      margin-bottom: 0.4rem;
-      letter-spacing: 0.08em;
-    }
-
-    .cast-age {
-      color: var(--gold-accent);
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      letter-spacing: 0.08em;
-      opacity: 0.95;
-    }
-
-    .cast-stats {
+    .contact-box {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.4rem;
+      background: var(--card);
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
+      gap: .55rem;
+    }
+
+    .contact-box strong { color: #ffd8ed; }
+    .contact-box p { color: var(--sub); }
+
+    footer {
+      border-top: 1px solid var(--line);
+      text-align: center;
+      color: #b8a6ca;
+      padding: 2.2rem 1rem 2.8rem;
       font-size: 0.9rem;
     }
 
-    .stat-item { color: var(--silver); opacity: 0.9; }
-    .stat-item strong { color: var(--rose-gold); }
-
-    .cast-description { color: var(--silver); opacity: 0.85; line-height: 1.75; font-size: 0.95rem; }
-
-    /* Service Cards */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.5rem;
-      margin-top: 3rem;
-    }
-
-    .service-card {
-      background: rgba(26, 0, 51, 0.6);
-      border: 2px solid transparent;
-      border-radius: 20px;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      position: relative;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      padding: 2px;
-      background: linear-gradient(135deg, var(--neon-pink), var(--gold-accent), var(--neon-pink));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-
-    .service-card:hover::before { opacity: 1; }
-    .service-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(255, 27, 141, 0.28); }
-
-    /* ✅ 絵文字アイコン→画像サムネに置換 */
-    .service-thumb {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      display: block;
-      filter: saturate(1.05) contrast(1.05);
-    }
-
-    .service-body { padding: 2.4rem 2.2rem 2.6rem; }
-
-    .service-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--neon-pink);
-      margin-bottom: 0.8rem;
-      letter-spacing: 0.05em;
-    }
-
-    .service-time {
-      color: var(--gold-accent);
-      font-size: 1.05rem;
-      margin-bottom: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-    }
-
-    .service-price {
-      font-size: 2.3rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--gold-accent), var(--neon-pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1.2rem;
-    }
-
-    .service-description { color: var(--silver); opacity: 0.86; line-height: 1.85; margin-bottom: 1.2rem; }
-
-    .service-features { list-style: none; margin-top: 1.2rem; }
-    .service-features li {
-      color: var(--silver);
-      opacity: 0.82;
-      margin-bottom: 0.7rem;
-      padding-left: 1.4rem;
-      position: relative;
-    }
-    /* ✅ ✦ を自然な「線」に */
-    .service-features li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.65em;
-      width: 10px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--neon-pink), var(--gold-accent));
-      border-radius: 99px;
-    }
-
-    /* Contact/System Section */
-    .contact-section {
-      background: linear-gradient(135deg, rgba(26, 0, 51, 0.8), rgba(10, 0, 20, 0.9));
-      border: 1px solid rgba(255, 27, 141, 0.3);
-      border-radius: 30px;
-      padding: 4rem 3rem;
-      margin-top: 4rem;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      margin-top: 3rem;
-    }
-
-    .contact-info { font-size: 1.05rem; line-height: 2.2; }
-    .contact-info p { margin-bottom: 1.3rem; display: flex; align-items: baseline; gap: 1rem; }
-    .contact-info strong { color: var(--neon-pink); font-weight: 650; min-width: 120px; letter-spacing: 0.05em; }
-
-    /* ✅ 絵文字アイコン→CSSドット */
-    .info-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--gold-accent), var(--neon-pink));
-      box-shadow: 0 0 14px rgba(255, 27, 141, 0.4);
-      flex: 0 0 10px;
-      transform: translateY(-1px);
-    }
-
-    .contact-form { display: flex; flex-direction: column; gap: 1.4rem; }
-    .contact-form input, .contact-form textarea, .contact-form select {
-      width: 100%;
-      background: rgba(255, 27, 141, 0.05);
-      border: 1px solid rgba(255, 27, 141, 0.3);
-      padding: 1.15rem 1.3rem;
-      color: var(--silver);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
-      border-radius: 10px;
-      transition: all 0.3s ease;
-    }
-
-    .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
-      outline: none;
-      border-color: var(--neon-pink);
-      background: rgba(255, 27, 141, 0.1);
-      box-shadow: 0 0 20px rgba(255, 27, 141, 0.2);
-    }
-
-    .contact-form textarea { min-height: 150px; resize: vertical; }
-
-    .submit-btn {
-      background: linear-gradient(135deg, var(--neon-pink), var(--hot-magenta));
-      color: white;
-      border: none;
-      padding: 1.25rem 3rem;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(255, 27, 141, 0.3);
-    }
-
-    .submit-btn:hover { transform: scale(1.05); box-shadow: 0 15px 50px rgba(255, 27, 141, 0.5); }
-
-    /* Footer */
-    footer {
-      background: rgba(10, 0, 20, 0.95);
-      border-top: 1px solid rgba(255, 27, 141, 0.3);
-      padding: 3rem;
-      text-align: center;
-      margin-top: 6rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .footer-content { max-width: 1200px; margin: 0 auto; }
-    .footer-logo {
-      font-family: 'Cinzel', serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--neon-pink), var(--gold-accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1.2rem;
-      letter-spacing: 0.15em;
-    }
-    .footer-text { color: var(--silver); opacity: 0.7; font-size: 0.9rem; line-height: 1.9; margin-bottom: 2rem; }
-    .footer-note { font-size: 0.85rem; color: var(--rose-gold); margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255, 27, 141, 0.2); }
-
-    /* Scroll Reveal */
-    .reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-
-    /* ✅ パーティクルは「丸」だけ（絵文字なし） */
-    .particle {
-      position: fixed;
-      width: 4px;
-      height: 4px;
-      background: var(--neon-pink);
-      border-radius: 50%;
-      pointer-events: none;
-      animation: float 20s infinite;
-      opacity: 0;
-      box-shadow: 0 0 10px var(--neon-pink);
-      z-index: 2;
-    }
-    @keyframes float {
-      0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
-      10%  { opacity: 1; }
-      90%  { opacity: 1; }
-      100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
-    }
-
-    /* Responsive */
-    @media (max-width: 968px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { display: none; }
-      section { padding: 4rem 1.5rem; }
-      .cast-grid, .services-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .hero-title { font-size: 3.3rem; }
+    @media (max-width: 768px) {
+      .nav ul { display: none; }
+      .hero { min-height: 78vh; }
+      section { padding: 4rem 0; }
     }
   </style>
 </head>
-
 <body>
-  <div class="top-bar">
-    ★ 完全予約制 ★ 24時間受付中 ★ 18歳未満入店不可 ★
-  </div>
+  <div class="notice">完全予約制 / 18歳未満のご利用不可 / 京都・烏丸御池エリア</div>
 
-  <nav>
-    <div class="logo">VELVET ROSE</div>
-    <ul class="nav-links">
-      <li><a href="#cast">CAST</a></li>
-      <li><a href="#services">COURSE</a></li>
-      <li><a href="#system">SYSTEM</a></li>
-      <li><a href="#contact">RESERVE</a></li>
-    </ul>
-  </nav>
-
-  <section class="hero">
-    <div class="hero-content">
-      <h1 class="hero-title">VELVET ROSE</h1>
-      <p class="hero-subtitle">PREMIUM MEN'S ESTHETIC</p>
-      <p class="hero-description">
-        京都最上級のニューハーフセラピストによる<br>
-        極上のリラクゼーション体験
-      </p>
-      <a href="#contact" class="cta-button">今すぐ予約する</a>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top">艶 -EN-</a>
+      <ul>
+        <li><a href="#about">当店について</a></li>
+        <li><a href="#therapist">セラピスト</a></li>
+        <li><a href="#course">コース</a></li>
+        <li><a href="#access">アクセス</a></li>
+      </ul>
     </div>
-  </section>
+  </header>
 
-  <section id="cast">
-    <div class="section-header reveal">
-      <h2 class="section-title">CAST</h2>
-      <p class="section-subtitle">在籍セラピスト</p>
-    </div>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner container">
+        <p class="kicker">KYOTO NEWHALF MEN'S ESTHE</p>
+        <h1>京都で出会う、
+          <br />上質な癒しの時間。</h1>
+        <p class="lead">ニューハーフセラピストならではの繊細さと包容力を活かし、
+          心身の緊張をほどくプライベートトリートメントをご提供します。</p>
+        <div class="btn-group">
+          <a class="btn btn-primary" href="#access">ご予約方法を見る</a>
+          <a class="btn btn-outline" href="#course">コース料金</a>
+        </div>
+      </div>
+    </section>
 
-    <div class="cast-grid">
-      <div class="cast-card reveal">
-        <img class="cast-photo" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1400&q=80" alt="MIKA">
-        <div class="cast-body">
-          <h3 class="cast-name">MIKA</h3>
-          <p class="cast-age">25歳 / T:168cm</p>
-          <div class="cast-stats">
-            <div class="stat-item"><strong>スタイル:</strong> モデル系</div>
-            <div class="stat-item"><strong>タイプ:</strong> 癒し系</div>
+    <section id="about" class="container">
+      <div class="section-head">
+        <p class="en">about</p>
+        <h2>艶 -EN- のこだわり</h2>
+        <p>“品格・清潔感・安心感”を大切にした、京都のメンズエステサロンです。</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <h3>完全個室</h3>
+          <p>周囲を気にせず過ごせる静かなプライベート空間をご用意しています。</p>
+        </article>
+        <article class="card">
+          <h3>オーダーメイド施術</h3>
+          <p>お疲れの箇所や気分に合わせて、圧・リズム・香りを調整します。</p>
+        </article>
+        <article class="card">
+          <h3>丁寧なカウンセリング</h3>
+          <p>初めての方にも安心してご利用いただけるよう、事前にしっかりご案内します。</p>
+        </article>
+        <article class="card">
+          <h3>深夜帯も対応</h3>
+          <p>お仕事帰りにも立ち寄りやすい営業時間で、日々の疲れをリセットできます。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="therapist" class="container">
+      <div class="section-head">
+        <p class="en">therapist</p>
+        <h2>在籍セラピスト</h2>
+        <p>経験・技術・接客力にこだわって厳選しています。</p>
+      </div>
+      <div class="therapist-grid">
+        <article class="therapist">
+          <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1000&q=80" alt="KAEDE" />
+          <div class="therapist-body">
+            <h3>KAEDE <small> / T168</small></h3>
+            <p>穏やかな接客と安定感のある手技が人気。ゆったり休みたい方におすすめ。</p>
           </div>
-          <p class="cast-description">
-            明るく優しい性格で、初めてのお客様でもリラックスできる雰囲気作りが得意。丁寧な施術と心地よい会話で極上の時間をお届けします。
-          </p>
-        </div>
-      </div>
-
-      <div class="cast-card reveal">
-        <img class="cast-photo" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=80" alt="RIN">
-        <div class="cast-body">
-          <h3 class="cast-name">RIN</h3>
-          <p class="cast-age">23歳 / T:165cm</p>
-          <div class="cast-stats">
-            <div class="stat-item"><strong>スタイル:</strong> 美人系</div>
-            <div class="stat-item"><strong>タイプ:</strong> セクシー</div>
+        </article>
+        <article class="therapist">
+          <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=1000&q=80" alt="RUI" />
+          <div class="therapist-body">
+            <h3>RUI <small> / T171</small></h3>
+            <p>しっかり目の圧とテンポで、首肩や腰まわりの疲れを丁寧にケアします。</p>
           </div>
-          <p class="cast-description">
-            大人の色気溢れる雰囲気が魅力。確かなテクニックと繊細なタッチで、身体の芯から癒される至福のひとときを演出します。
-          </p>
-        </div>
-      </div>
-
-      <div class="cast-card reveal">
-        <img class="cast-photo" src="https://images.unsplash.com/photo-1525134479668-1bee5c7c6845?auto=format&fit=crop&w=1400&q=80" alt="YUNA">
-        <div class="cast-body">
-          <h3 class="cast-name">YUNA</h3>
-          <p class="cast-age">27歳 / T:170cm</p>
-          <div class="cast-stats">
-            <div class="stat-item"><strong>スタイル:</strong> お姉さん系</div>
-            <div class="stat-item"><strong>タイプ:</strong> 上品</div>
+        </article>
+        <article class="therapist">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1000&q=80" alt="AYA" />
+          <div class="therapist-body">
+            <h3>AYA <small> / T165</small></h3>
+            <p>上品で柔らかな雰囲気。会話も楽しみながら癒されたい方に好評です。</p>
           </div>
-          <p class="cast-description">
-            豊富な経験と高い技術力を持つベテランセラピスト。お客様一人ひとりのお悩みに寄り添った最高級の施術をご提供します。
-          </p>
-        </div>
+        </article>
       </div>
+    </section>
 
-      <div class="cast-card reveal">
-        <img class="cast-photo" src="https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=1400&q=80" alt="SARA">
-        <div class="cast-body">
-          <h3 class="cast-name">SARA</h3>
-          <p class="cast-age">24歳 / T:163cm</p>
-          <div class="cast-stats">
-            <div class="stat-item"><strong>スタイル:</strong> 可愛い系</div>
-            <div class="stat-item"><strong>タイプ:</strong> 明るい</div>
-          </div>
-          <p class="cast-description">
-            キュートな笑顔と元気な性格が人気。楽しい時間を過ごしながら、しっかりと疲れを癒す施術が魅力です。
-          </p>
-        </div>
+    <section id="course" class="container">
+      <div class="section-head">
+        <p class="en">course</p>
+        <h2>コース料金</h2>
+        <p>全コース オイルトリートメント + シャワー時間込み。</p>
       </div>
-
-      <div class="cast-card reveal">
-        <img class="cast-photo" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?auto=format&fit=crop&w=1400&q=80" alt="NANA">
-        <div class="cast-body">
-          <h3 class="cast-name">NANA</h3>
-          <p class="cast-age">26歳 / T:167cm</p>
-          <div class="cast-stats">
-            <div class="stat-item"><strong>スタイル:</strong> スレンダー</div>
-            <div class="stat-item"><strong>タイプ:</strong> 大人</div>
-          </div>
-          <p class="cast-description">
-            洗練された雰囲気と確かな技術。落ち着いた空間で、日常の喧騒を忘れられる特別な癒しの時間をご提供します。
-          </p>
-        </div>
+      <div class="price-table">
+        <table>
+          <thead>
+            <tr>
+              <th>コース</th>
+              <th>時間</th>
+              <th>料金</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>リラックスコース</td>
+              <td>70分</td>
+              <td>12,000円</td>
+            </tr>
+            <tr>
+              <td>スタンダードコース</td>
+              <td>100分</td>
+              <td>16,000円</td>
+            </tr>
+            <tr>
+              <td>プレミアムコース</td>
+              <td>130分</td>
+              <td>21,000円</td>
+            </tr>
+            <tr>
+              <td>延長</td>
+              <td>30分</td>
+              <td>6,000円</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </section>
 
-      <div class="cast-card reveal">
-        <img class="cast-photo" src="https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?auto=format&fit=crop&w=1400&q=80" alt="KANA">
-        <div class="cast-body">
-          <h3 class="cast-name">KANA</h3>
-          <p class="cast-age">22歳 / T:166cm</p>
-          <div class="cast-stats">
-            <div class="stat-item"><strong>スタイル:</strong> グラマラス</div>
-            <div class="stat-item"><strong>タイプ:</strong> 情熱的</div>
-          </div>
-          <p class="cast-description">
-            新人ながら抜群のセンスと情熱的な施術で大人気。フレッシュな魅力と真摯な姿勢で極上の体験をお届けします。
-          </p>
-        </div>
+    <section id="access" class="container">
+      <div class="section-head">
+        <p class="en">access & contact</p>
+        <h2>アクセス・ご予約</h2>
+        <p>LINEまたはお電話でご予約ください。空き状況をご案内いたします。</p>
       </div>
-    </div>
-  </section>
-
-  <section id="services">
-    <div class="section-header reveal">
-      <h2 class="section-title">COURSE</h2>
-      <p class="section-subtitle">コース料金</p>
-    </div>
-
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <img class="service-thumb" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1600&q=80" alt="ショートコース">
-        <div class="service-body">
-          <h3 class="service-name">ショートコース</h3>
-          <p class="service-time">60分</p>
-          <p class="service-price">¥15,000</p>
-          <p class="service-description">
-            初めての方やお時間が限られている方におすすめ。全身のリラクゼーションを気軽にお楽しみいただけます。
-          </p>
-          <ul class="service-features">
-            <li>全身オイルマッサージ</li>
-            <li>アロマトリートメント</li>
-            <li>ドリンクサービス</li>
-          </ul>
-        </div>
+      <div class="contact-box">
+        <p><strong>店舗名：</strong> 京都メンズエステ 艶 -EN-</p>
+        <p><strong>エリア：</strong> 京都市中京区（烏丸御池駅より徒歩4分 / 詳細はご予約確定後にご案内）</p>
+        <p><strong>営業時間：</strong> 12:00〜翌2:00（最終受付 24:00）</p>
+        <p><strong>TEL：</strong> 075-123-4567</p>
+        <p><strong>LINE：</strong> @en-kyoto</p>
+        <p><strong>注意事項：</strong> 当店はリラクゼーションを目的としたサロンです。迷惑行為・泥酔状態でのご利用はお断りいたします。</p>
       </div>
-
-      <div class="service-card reveal">
-        <img class="service-thumb" src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80" alt="スタンダードコース">
-        <div class="service-body">
-          <h3 class="service-name">スタンダードコース</h3>
-          <p class="service-time">90分</p>
-          <p class="service-price">¥22,000</p>
-          <p class="service-description">
-            当店人気No.1コース。じっくりと時間をかけた丁寧な施術で、心身ともに深い癒しを体感いただけます。
-          </p>
-          <ul class="service-features">
-            <li>全身オイルマッサージ</li>
-            <li>ディープリラクゼーション</li>
-            <li>ボディケア</li>
-            <li>シャワー・ドリンク付き</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="service-card reveal">
-        <img class="service-thumb" src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1600&q=80" alt="VIPコース">
-        <div class="service-body">
-          <h3 class="service-name">VIPコース</h3>
-          <p class="service-time">120分</p>
-          <p class="service-price">¥30,000</p>
-          <p class="service-description">
-            贅沢な時間を堪能したい方のための特別コース。最上級の技術とおもてなしで至福の時間をお約束します。
-          </p>
-          <ul class="service-features">
-            <li>プレミアムオイルマッサージ</li>
-            <li>フルボディトリートメント</li>
-            <li>ヘッドスパ</li>
-            <li>フットケア</li>
-            <li>VIPルーム利用</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="service-card reveal">
-        <img class="service-thumb" src="https://images.unsplash.com/photo-1525097487452-6278ff080c31?auto=format&fit=crop&w=1600&q=80" alt="エグゼクティブコース">
-        <div class="service-body">
-          <h3 class="service-name">エグゼクティブコース</h3>
-          <p class="service-time">150分</p>
-          <p class="service-price">¥40,000</p>
-          <p class="service-description">
-            究極の癒しを求める方へ。すべてを忘れて贅沢な時間に身を委ねる、最高峰のコースです。
-          </p>
-          <ul class="service-features">
-            <li>フルオーダーメイド施術</li>
-            <li>プレミアムアロマセレクション</li>
-            <li>全身徹底ケア</li>
-            <li>リンパドレナージュ</li>
-            <li>スイートルーム完備</li>
-            <li>特別ドリンク・軽食付き</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="system">
-    <div class="section-header reveal">
-      <h2 class="section-title">SYSTEM</h2>
-      <p class="section-subtitle">ご利用案内</p>
-    </div>
-
-    <div class="contact-section reveal">
-      <div style="max-width: 820px; margin: 0 auto; line-height: 2;">
-        <h3 style="color: var(--neon-pink); font-size: 1.8rem; margin-bottom: 2rem; font-family: 'Playfair Display', serif;">ご利用の流れ</h3>
-        <p style="margin-bottom: 2rem;">① お電話またはLINEにてご予約 → ② ご来店・受付 → ③ シャワー → ④ 施術開始 → ⑤ アフターティータイム → ⑥ お会計・お見送り</p>
-
-        <h3 style="color: var(--neon-pink); font-size: 1.8rem; margin-bottom: 2rem; margin-top: 3rem; font-family: 'Playfair Display', serif;">料金システム</h3>
-        <p style="margin-bottom: 1rem;">• 表示料金は全て税込価格です</p>
-        <p style="margin-bottom: 1rem;">• 指名料：2,000円</p>
-        <p style="margin-bottom: 1rem;">• 延長料金：30分 8,000円</p>
-        <p style="margin-bottom: 2rem;">• 各種クレジットカード・電子マネー対応</p>
-
-        <h3 style="color: var(--neon-pink); font-size: 1.8rem; margin-bottom: 2rem; margin-top: 3rem; font-family: 'Playfair Display', serif;">注意事項</h3>
-        <p style="margin-bottom: 1rem;">• 18歳未満の方のご利用はお断りしております</p>
-        <p style="margin-bottom: 1rem;">• 泥酔されている方のご入店はお断りする場合がございます</p>
-        <p style="margin-bottom: 1rem;">• セラピストへの迷惑行為は固くお断りいたします</p>
-        <p style="margin-bottom: 1rem;">• 当店は健全なリラクゼーションサロンです</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="section-header reveal">
-      <h2 class="section-title">RESERVE</h2>
-      <p class="section-subtitle">ご予約・お問い合わせ</p>
-    </div>
-
-    <div class="contact-section">
-      <div class="contact-grid">
-        <div class="contact-info reveal">
-          <p><span class="info-dot"></span><strong>電話番号</strong>075-XXX-XXXX</p>
-          <p><span class="info-dot"></span><strong>LINE ID</strong>@velvetrose-kyoto</p>
-          <p><span class="info-dot"></span><strong>営業時間</strong>12:00 - 翌5:00</p>
-          <p><span class="info-dot"></span><strong>定休日</strong>年中無休</p>
-          <p><span class="info-dot"></span><strong>所在地</strong>京都市中京区XX町XXX</p>
-          <p><span class="info-dot"></span><strong>アクセス</strong>烏丸御池駅 徒歩3分</p>
-        </div>
-
-        <form class="contact-form reveal">
-          <input type="text" placeholder="お名前（仮名可）" required>
-          <input type="tel" placeholder="電話番号" required>
-          <select required>
-            <option value="">ご希望のコースを選択</option>
-            <option value="60">ショートコース（60分）</option>
-            <option value="90">スタンダードコース（90分）</option>
-            <option value="120">VIPコース（120分）</option>
-            <option value="150">エグゼクティブコース（150分）</option>
-          </select>
-          <input type="datetime-local" required>
-          <textarea placeholder="ご希望のセラピスト・その他ご要望"></textarea>
-          <button type="submit" class="submit-btn">予約を申し込む</button>
-        </form>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
-    <div class="footer-content">
-      <div class="footer-logo">VELVET ROSE</div>
-      <p class="footer-text">
-        京都最高級のニューハーフメンズエステティックサロン<br>
-        プライベート空間で極上の癒しをご提供いたします
-      </p>
-      <p class="footer-note">
-        © 2026 VELVET ROSE KYOTO. All Rights Reserved.<br>
-        当店は18歳未満の方のご利用を固くお断りしております
-      </p>
-    </div>
+    © 2026 京都メンズエステ 艶 -EN- / All Rights Reserved.<br />
+    本サイトはサロン紹介を目的としたホームページです。
   </footer>
-
-  <script>
-    alert(`本ウェブサイトは、ウェブ表示、画面構成およびシステム挙動の確認を目的として試験的に公開しているページです。
-
-サイト上には、画面設計上の検証を目的として「予約」等の表示または入力導線が含まれておりますが、これらはすべて動作確認用のダミー表示であり、現時点において実際の予約受付、商品・サービスの提供、顧客の勧誘・募集、契約の申込みまたは締結の誘引、対価の受領その他一切の営業行為を行うものではありません。
-
-また、本サイトを通じて送信された情報等に基づき、取引関係が成立することはなく、事業としての運営も開始しておりません。
-
-本サイトの公開は、既存の契約上の義務および関係法令を遵守する範囲内で行うものであり、これらに抵触する目的または意図を有するものではありません。`);
-    
-    // Scroll reveal animation
-    const reveals = document.querySelectorAll('.reveal');
-    const revealOnScroll = () => {
-      reveals.forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < window.innerHeight - 100) el.classList.add('active');
-      });
-    };
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-
-    // Form submission (デモ)
-    document.querySelector('.contact-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('ご予約ありがとうございます！\\n担当者より折り返しご連絡させていただきます。');
-      e.target.reset();
-    });
-
-    // Floating particles
-    function createParticle() {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      p.style.left = Math.random() * 100 + 'vw';
-      p.style.animationDuration = (Math.random() * 10 + 15) + 's';
-      p.style.animationDelay = Math.random() * 5 + 's';
-      document.body.appendChild(p);
-      setTimeout(() => p.remove(), 25000);
-    }
-    setInterval(createParticle, 2000);
-    for (let i = 0; i < 10; i++) setTimeout(createParticle, i * 300);
-  </script>
 </body>
 </html>
